@@ -3,5 +3,15 @@
     "title": "Git: simple commit log",
     "doc": "+ since: `1.week`, `yesterday`, `1.month`, ...",
     "code": "git log --author=authorname --since=1.week --format='%ad - %s' --date=iso"
+  },
+  {
+    "title": "Protractor: Disable animations",
+    "doc": "",
+    "code": "// css\n.notransition * {\n  -webkit-transition: none !important;\n  -moz-transition: none !important;\n  -o-transition: none !important;\n  -ms-transition: none !important;\n  transition: none !important;\n}\n\n// js (protractor)\nfunction disableAnimation() {\n  element(by.css('body')).allowAnimations(false);\n  browser.executeScript(\"document.body.className += ' notransition';\");\n}"
+  },
+  {
+    "title": "Protractor: drag and drop",
+    "doc": "You can simply use `browser.actions()` function to to that.\nhttp://stackoverflow.com/questions/24315571/drag-drop-with-protractor-by-repeater",
+    "code": "var startPoint = $('.start');\nvar dropPoint = $('.end');\n\nbrowser.actions().\n  mouseMove(startPoint).\n  mouseDown().\n  mouseMove(dropPoint).\n  mouseUp().\n  perform();"
   }
 ]
