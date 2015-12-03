@@ -1,0 +1,7 @@
+[
+  {
+    "title": "Git: simple commit log",
+    "doc": "+ since: `1.week`, `yesterday`, `1.month`, ...",
+    "code": "git log --author=authorname --since=1.week --format='%ad - %s' --date=iso"
+  }
+]
