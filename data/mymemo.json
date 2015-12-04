@@ -1,8 +1,13 @@
 [
   {
     "title": "Git: simple commit log",
-    "doc": "+ since: `1.week`, `yesterday`, `1.month`, ...",
+    "doc": "+ since: `1.day`, `1.month`, ...",
     "code": "git log --author=authorname --since=1.week --format='%ad - %s' --date=iso"
+  },
+  {
+    "title": "Angular: watch specific element and fire events",
+    "doc": "`MutationObserver` will help it",
+    "code": "var blocker = angular.element('#contentsTbl')[0];\nvar observer = new MutationObserver(function(mutations) {\n  render();\n});\nvar observerOpt = {characterData: true, childList: true, subtree: true};\n\nobserver.observe(blocker, observerOpt);\n\nfunction render() {\n  observer.disconnect();\n  angular.forEach(angular.element('pre code'), function(block, index)) {\n    hljs.highlightBlock(block);\n  });\n\n  observer.observe(blocker, observerOpt);\n}"
   },
   {
     "title": "Protractor: Disable animations",
@@ -13,5 +18,20 @@
     "title": "Protractor: drag and drop",
     "doc": "You can simply use `browser.actions()` function to to that.\nhttp://stackoverflow.com/questions/24315571/drag-drop-with-protractor-by-repeater",
     "code": "var startPoint = $('.start');\nvar dropPoint = $('.end');\n\nbrowser.actions().\n  mouseMove(startPoint).\n  mouseDown().\n  mouseMove(dropPoint).\n  mouseUp().\n  perform();"
+  },
+  {
+    "title": "Protractor: toBe and toEqual",
+    "doc": "+ for primitive types(5, true, \"aaa\", ...), there is no difference\n+ `toBe` is equal to `===` \n  - exactly the same (same location of memory)\n+ `toEqual` is  equal to `==`\n  - does a recursive search through the objects to determine whether the values for their keys are equivalent",
+    "code": "var a = { bar: 'baz' };\nvar b = {foo:  a};\nvar c = {foo: a};\n\nexpect(b.foo).toBe(c.foo) // ng\nexpect(b.foo).toEqual(c.foo) // ok"
+  },
+  {
+    "title": "Protractor: coding style",
+    "doc": "+ get an element: `$('css-selector')`\n+ get elements: `$$('css-selector')`\n+ assertion\n  - primitive types: `toBe`\n  - objects: `toEqual`",
+    "code": ""
+  },
+  {
+    "title": "Angular: Testing strategy",
+    "doc": "+ Contoller\n  - serviceはmock化する。\n\n+ [reference](https://gist.github.com/blesh/8846528)",
+    "code": ""
   }
 ]
