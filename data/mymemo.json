@@ -30,6 +30,11 @@
     "code": ""
   },
   {
+    "title": "Bootstrap: Sidebar",
+    "doc": "+ [link](http://junonet.biz/web-design/css%E3%81%A7%E3%82%B5%E3%82%A4%E3%83%89%E3%81%A8%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E9%AB%98%E3%81%95%E3%82%92%E6%8F%83%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/)",
+    "code": "--- html\n\n<div class=\"container-fluid\" id=\"contents\">\n  <div class=\"sidebar col-lg-2\"> ... </>\n  <div class=\"main col-lg-10\"> ... </>\n</div>\n\n--- css\n\n#contents {\n  overflow: hidden;\n}\n\n.sidebar {\n  padding-bottom: 10000px;\n  margin-bottom: -10000px;\n}"
+  },
+  {
     "title": "Angular: Testing strategy",
     "doc": "+ Contoller\n  - serviceはmock化する。\n\n+ [reference](https://gist.github.com/blesh/8846528)",
     "code": ""
