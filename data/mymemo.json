@@ -32,11 +32,26 @@
   {
     "title": "Bootstrap: Sidebar",
     "doc": "+ [link](http://junonet.biz/web-design/css%E3%81%A7%E3%82%B5%E3%82%A4%E3%83%89%E3%81%A8%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E9%AB%98%E3%81%95%E3%82%92%E6%8F%83%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/)",
-    "code": "--- html\n\n<div class=\"container-fluid\" id=\"contents\">\n  <div class=\"sidebar col-lg-2\"> ... </>\n  <div class=\"main col-lg-10\"> ... </>\n</div>\n\n--- css\n\n#contents {\n  overflow: hidden;\n}\n\n.sidebar {\n  padding-bottom: 10000px;\n  margin-bottom: -10000px;\n}"
+    "code": "--- html\n\n<div class=\"container-fluid\" id=\"contents\">\n  <div class=\"sidebar col-md-2\"> ... </>\n  <div class=\"main col-md-10\"> ... </>\n</div>\n\n--- css\n\n#contents {\n  overflow: hidden;\n}\n\n.sidebar {\n  padding-bottom: 10000px;\n  margin-bottom: -10000px;\n}"
   },
   {
     "title": "Angular: Testing strategy",
     "doc": "+ Contoller\n  - serviceはmock化する。\n\n+ [reference](https://gist.github.com/blesh/8846528)",
     "code": ""
+  },
+  {
+    "title": "Node: http request",
+    "doc": "",
+    "code": "var http = require('http');\n\nvar data = {message: 'hello'};\n \nvar options = {\n  host: 'api.example.com',\n  path: '/api/hello',\n  method: POST,\n  headers: {\n    'Authorization': 'bearer XXXX',\n    'Content-Type': 'application/x-www-form-urlencoded',\n    'Content-Length': data.length\n  }\n}\n\nvar resdata = '';\nvar req = http.request(options, function(res) {\n  res.setEncoding('utf8');\n  res.on('data', function (chunk) {\n    resdata += chunk;\n  });\n\n  res.on('end', function() {\n    res.status(200).json(JSON.parse(resdata));\n  });\n});\n\nreq.on('error', function(e) {\n  console.log(e.message);\n  process.exit();\n});\n\nreq.write(data)\nreq.end();"
+  },
+  {
+    "title": "Node: export multiple modules",
+    "doc": "To access, \n\n```\nvar hello = require('./hello')\nrouter.post('/', hello.a)\n\n```",
+    "code": "function a() {\n  // function\n}\n\nfunction b() {\n // function\n}\n\nmodule.exports = { a: a, b: b};"
+  },
+  {
+    "title": "Node: route definition (express)",
+    "doc": "in `server.js`\n\n```\nvar hello = require(__dirname + '/app/routes/hello');\napp.use('/api/hello', hello);\n\napp.get('*', function(req, res) {\n  res.sendFile(__dirname + '/public/index.html');\n})\n```",
+    "code": "var express = require('express');\nvar router = express.Router();\n\nvar apiFunctions = require('./apiFunctions') // means ./apiFunctions.js\n\nrouter.get('/', apiFunctions.getRoot);\nrouter.post('/', apiFunctions.createFile);"
   }
 ]
