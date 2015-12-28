@@ -10,6 +10,11 @@
     "code": "var blocker = angular.element('#contentsTbl')[0];\nvar observer = new MutationObserver(function(mutations) {\n  render();\n});\nvar observerOpt = {characterData: true, childList: true, subtree: true};\n\nobserver.observe(blocker, observerOpt);\n\nfunction render() {\n  observer.disconnect();\n  angular.forEach(angular.element('pre code'), function(block, index)) {\n    hljs.highlightBlock(block);\n  });\n\n  observer.observe(blocker, observerOpt);\n}"
   },
   {
+    "title": "Angular: Testing strategy",
+    "doc": "+ Contoller\n  - serviceはmock化する。\n\n+ [reference](https://gist.github.com/blesh/8846528)",
+    "code": ""
+  },
+  {
     "title": "Protractor: Disable animations",
     "doc": "",
     "code": "// css\n.notransition * {\n  -webkit-transition: none !important;\n  -moz-transition: none !important;\n  -o-transition: none !important;\n  -ms-transition: none !important;\n  transition: none !important;\n}\n\n// js (protractor)\nfunction disableAnimation() {\n  element(by.css('body')).allowAnimations(false);\n  browser.executeScript(\"document.body.className += ' notransition';\");\n}"
@@ -35,23 +40,43 @@
     "code": "--- html\n\n<div class=\"container-fluid\" id=\"contents\">\n  <div class=\"sidebar col-md-2\"> ... </>\n  <div class=\"main col-md-10\"> ... </>\n</div>\n\n--- css\n\n#contents {\n  overflow: hidden;\n}\n\n.sidebar {\n  padding-bottom: 10000px;\n  margin-bottom: -10000px;\n}"
   },
   {
-    "title": "Angular: Testing strategy",
-    "doc": "+ Contoller\n  - serviceはmock化する。\n\n+ [reference](https://gist.github.com/blesh/8846528)",
-    "code": ""
+    "title": "js: 三項演算子",
+    "doc": "変数 = 評価式 ? trueの場合 : falseの場合",
+    "code": "var hoge = config.isEnabled() ? huga : 'default';"
   },
   {
-    "title": "Node: http request",
+    "title": "node: http request",
     "doc": "",
     "code": "var http = require('http');\n\nvar data = {message: 'hello'};\n \nvar options = {\n  host: 'api.example.com',\n  path: '/api/hello',\n  method: POST,\n  headers: {\n    'Authorization': 'bearer XXXX',\n    'Content-Type': 'application/x-www-form-urlencoded',\n    'Content-Length': data.length\n  }\n}\n\nvar resdata = '';\nvar req = http.request(options, function(res) {\n  res.setEncoding('utf8');\n  res.on('data', function (chunk) {\n    resdata += chunk;\n  });\n\n  res.on('end', function() {\n    res.status(200).json(JSON.parse(resdata));\n  });\n});\n\nreq.on('error', function(e) {\n  console.log(e.message);\n  process.exit();\n});\n\nreq.write(data)\nreq.end();"
   },
   {
-    "title": "Node: export multiple modules",
+    "title": "node: export multiple modules",
     "doc": "To access, \n\n```\nvar hello = require('./hello')\nrouter.post('/', hello.a)\n\n```",
     "code": "function a() {\n  // function\n}\n\nfunction b() {\n // function\n}\n\nmodule.exports = { a: a, b: b};"
   },
   {
-    "title": "Node: route definition (express)",
+    "title": "node: route definition (express)",
     "doc": "in `server.js`\n\n```\nvar hello = require(__dirname + '/app/routes/hello');\napp.use('/api/hello', hello);\n\napp.get('*', function(req, res) {\n  res.sendFile(__dirname + '/public/index.html');\n})\n```",
     "code": "var express = require('express');\nvar router = express.Router();\n\nvar apiFunctions = require('./apiFunctions') // means ./apiFunctions.js\n\nrouter.get('/', apiFunctions.getRoot);\nrouter.post('/', apiFunctions.createFile);"
+  },
+  {
+    "title": "node: ignore self signed SSL",
+    "doc": "",
+    "code": "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';"
+  },
+  {
+    "title": "node: simple location change",
+    "doc": "Write location header of the response.\nThen, you need to finish response with `end` function.",
+    "code": "res.writeHead(303, { Location: 'http://example.com/redirected' });\nres.end();"
+  },
+  {
+    "title": "node: change env",
+    "doc": "You can set the environment via: `NODE_ENV`\nex: `$ NODE_ENV=production gulp start_server`",
+    "code": "// require like this\nvar config = require('./config/env.json')[process.env.NODE_ENV || 'dev-local'];\n\n// use like this\nvar host = config.host;\n\n// configure like this (env.json) REMEMBER: you have to ignore this file\n{\"dev-local\": {\"host\":\"localhost\"}, \"production\":{\"host\":\"myapp.example.com\"}}"
+  },
+  {
+    "title": "node: base64",
+    "doc": "",
+    "code": "var buffer = new Buffer(content);\nvar encodedContent = buffer.toString('base64');"
   }
 ]
