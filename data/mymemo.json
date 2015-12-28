@@ -1,13 +1,13 @@
 [
   {
-    "title": "Git: simple commit log",
-    "doc": "+ since: `1.day`, `1.month`, ...",
-    "code": "git log --author=authorname --since=1.week --format='%ad - %s' --date=iso"
+    "title": "git: aliases",
+    "doc": "",
+    "code": "[alias]\n  alias = config --get-regexp \\\"alias.*\\\"\n  ci = commit\n  st = status\n  br = branch\n  co = checkout \n  ls = ls-files\n  undo = reset --hard\n  history = log --date=short --pretty=format:'%cd %C(yellow)%h %C(white) %s %C(green)@%cn' \n  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'"
   },
   {
-    "title": "Angular: watch specific element and fire events",
-    "doc": "`MutationObserver` will help it",
-    "code": "var blocker = angular.element('#contentsTbl')[0];\nvar observer = new MutationObserver(function(mutations) {\n  render();\n});\nvar observerOpt = {characterData: true, childList: true, subtree: true};\n\nobserver.observe(blocker, observerOpt);\n\nfunction render() {\n  observer.disconnect();\n  angular.forEach(angular.element('pre code'), function(block, index)) {\n    hljs.highlightBlock(block);\n  });\n\n  observer.observe(blocker, observerOpt);\n}"
+    "title": "angular: watch specific element and fire events",
+    "doc": "`MutationObserver` will help it\n+ [link](https://developer.mozilla.org/ja/docs/Web/API/MutationObserver)",
+    "code": "var blocker = angular.element('#observedElement')[0];\nvar observer = new MutationObserver(function(mutations) {\n  onChanged();\n});\nvar observerOpt = {characterData: true, childList: true, subtree: true};\n\nobserver.observe(blocker, observerOpt);\n\nfunction onChanged() {\n  observer.disconnect(); // If necessary\n  // do something\n  observer.observe(blocker, observerOpt); // If necessary\n}"
   },
   {
     "title": "Angular: Testing strategy",
@@ -41,12 +41,12 @@
   },
   {
     "title": "js: 三項演算子",
-    "doc": "変数 = 評価式 ? trueの場合 : falseの場合",
-    "code": "var hoge = config.isEnabled() ? huga : 'default';"
+    "doc": "+ 変数 = 評価式 ? trueの場合 : falseの場合\n+ デフォルト値を持たせるバリエーション\n  - 変数 = 指定値 || 指定されていない場合のデフォルト値",
+    "code": "var hoge = config.isEnabled() ? huga : 'default';\nvar hoge = process.env.HOST || 'localhost';"
   },
   {
     "title": "node: http request",
-    "doc": "",
+    "doc": "+ reference: https://nodejs.org/api/http.html",
     "code": "var http = require('http');\n\nvar data = {message: 'hello'};\n \nvar options = {\n  host: 'api.example.com',\n  path: '/api/hello',\n  method: POST,\n  headers: {\n    'Authorization': 'bearer XXXX',\n    'Content-Type': 'application/x-www-form-urlencoded',\n    'Content-Length': data.length\n  }\n}\n\nvar resdata = '';\nvar req = http.request(options, function(res) {\n  res.setEncoding('utf8');\n  res.on('data', function (chunk) {\n    resdata += chunk;\n  });\n\n  res.on('end', function() {\n    res.status(200).json(JSON.parse(resdata));\n  });\n});\n\nreq.on('error', function(e) {\n  console.log(e.message);\n  process.exit();\n});\n\nreq.write(data)\nreq.end();"
   },
   {
