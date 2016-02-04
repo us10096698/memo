@@ -2,7 +2,7 @@
   {
     "title": "git: aliases",
     "doc": "",
-    "code": "[alias]\n  alias = config --get-regexp \\\"alias.*\\\"\n  ci = commit\n  st = status\n  br = branch\n  co = checkout \n  ls = ls-files\n  undo = reset --hard\n  history = log --date=short --pretty=format:'%cd %C(yellow)%h %C(white) %s %C(green)@%cn' \n  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'"
+    "code": "[alias]\n  alias = config --get-regexp \\\"alias.*\\\"\n  ci = commit\n  st = status\n  br = branch\n  co = checkout \n  ls = ls-files\n  undo = reset --hard\n  hi = log --date=short --pretty=format:'%cd %C(yellow)%h %C(white) %s %C(green)@%cn' \n  lol = log --graph --decorate --pretty=oneline --abbrev-commit --all"
   },
   {
     "title": "angular: watch specific element and fire events",
